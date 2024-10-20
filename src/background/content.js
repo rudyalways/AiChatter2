@@ -17,7 +17,8 @@ document.addEventListener('click', function(event) {
 
 const checkForNewMessages = async() =>{
     // Get the element containing the list of messages
-    const messageWrapperList = document.querySelectorAll(".b-chat__item-message");
+    const messageWrapperList = document.querySelectorAll(".x18lvrbx");
+    alert(messageWrapperList)
 
     // Create an empty array to hold all the child elements
     const allChildElements = [];

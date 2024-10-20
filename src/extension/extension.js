@@ -22,41 +22,40 @@ GET_RESPONSE_BUTTON.addEventListener('click', async () => {
 
 const checkForNewMessagesAndReply = async() =>{
     lastMessage = '######';
-    // Get the element containing the list of messages
-    const messageWrapperList = document.querySelectorAll(".b-chat__item-message");
 
-    // Create an empty array to hold all the child elements
-    const allChildElements = [];
-    
-    messageWrapperList.forEach((mw) => {
-        // Convert the HTMLCollection (children) into an array and append to the allChildElements array
-        const childArray = Array.from(mw.children);
-        allChildElements.push(...childArray); // Spread the array to append the individual elements
-    });
-    const childrenData = []
-    allChildElements.forEach( (child) => {
-        const imgElement = child.querySelector('img[src]');
-        if (imgElement) {
-            //childrenData.push(imgElement.src)
-        }
-
-        if (child.classList.contains('m-from-me')){
-            childrenData.push(['model', child.textContent])
-        } else {
-            childrenData.push(['user', child.textContent])
-        }
-    })
-
-
-
-
-
+    alert('myinstagrammessage1')
+    const inputBox = document.querySelectorAll('.html-div.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1gslohp.x11i5rnm.x12nagc.x1mh8g0r.x1yc453h.x126k92a.x18lvrbx, .html-div.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1gslohp.x11i5rnm.x12nagc.x1mh8g0r.x1yc453h.x126k92a.xyk4ms5');
+    //alert(inputBox.length)
     chatHistory = ''
-    newMessage = ''
+
+    const childrenData = []
+    for (let element of inputBox) {
+
+        // outgoing
+        if (element.classList.contains('html-div') &&
+        element.classList.contains('xexx8yu') &&
+        element.classList.contains('x4uap5') &&
+        element.classList.contains('x18d9i69') &&
+        element.classList.contains('xkhd6sd') &&
+        element.classList.contains('x1gslohp') &&
+        element.classList.contains('x11i5rnm') &&
+        element.classList.contains('x12nagc') &&
+        element.classList.contains('x1mh8g0r') &&
+        element.classList.contains('x1yc453h') &&
+        element.classList.contains('x126k92a') &&
+        element.classList.contains('xyk4ms5')) {
+          chatHistory += ('outgoing:' + element.textContent+'\n')
+          childrenData.push(['model', element.textContent])
+        } else {
+          chatHistory += ('incoming:' + element.textContent+'\n')
+          childrenData.push(['user', element.textContent])
+        }
+    }
     childrenData.forEach( (d) =>{
-        chatHistory+=d[0]+':' + d[1] + '\n'
         newMessage = d[1]
     })
+    //alert(chatHistory)
+
 
     response = 'empty'
     if (response =='empty') {
@@ -71,10 +70,10 @@ const checkForNewMessagesAndReply = async() =>{
           //alert(response)
 
 
-        alert('res'+JSON.stringify(response))
-        //const aireply = response.body.candidates[0].content.parts[0].text
+        //alert('res'+JSON.stringify(response))
+        const aireply = response.body.candidates[0].content.parts[0].text
         // 
-        const aireply = 'aireply'
+        //const aireply = 'aireply'
         alert(aireply)
         
         //alert("message from AI!!!!\nmessage from AI!!!!\n\n" + aireply)
@@ -82,11 +81,12 @@ const checkForNewMessagesAndReply = async() =>{
 
         //const inputBox = document.querySelector('.b-make-post.textarea-wrapper textarea');
         //inputBox.value = "hi, how are you"
-        const inputBox = document.querySelector('.tiptap.ProseMirror.b-text-editor.js-text-editor.m-native-custom-scrollbar.m-scrollbar-y.m-scroll-behavior-auto.m-overscroll-behavior-auto');
-        //alert(inputBox)
+        alert('myinstagrammessage2')
+        const inputBox = document.querySelector('.x3jgonx')
+        alert(inputBox)
         if (inputBox) {
           const newMessage = aireply;
-          inputBox.innerHTML = newMessage;
+          inputBox.innerHTML = '###############';
         } else {
           alert('Input box not found.');
         }
