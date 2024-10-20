@@ -122,7 +122,7 @@ chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
     
         
     } else if (request.message == 'generateAIML') {
-      const apiKey = '7addc663e34e4be8a4ade72230a053d4'
+      const apiKey = 'fdf0cbbb408f42eda7f96cd28989dba0'
       const model = 'gpt-4o'
 
       let contents = [];
@@ -152,7 +152,7 @@ chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
           }),
         })
           .then((res) => res.json())
-          .then((res) => sendResponse(res));
+          .then((res) => sendResponse(res.choices[0].message.content));
       } catch (error) {
         sendResponse("Error")
       }
