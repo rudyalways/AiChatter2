@@ -64,10 +64,10 @@ const checkForNewMessagesAndReply = async() =>{
 
         // call ai model
         response = await chrome.runtime.sendMessage({
-            message: "generate",
+            message: 'generateAIML',
             chatHistory: childrenData
           });
-
+          alert(response)
           //alert(response)
 
 

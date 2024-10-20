@@ -32,18 +32,7 @@ const tryJsonParse = (text) => {
 chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
     ( async () => {
 
-    let contents = [];
 
-
-    request.chatHistory.forEach( (d) =>{
-        contents.push(
-            {
-                role: d[0],
-                parts: [{text :  d[1]}]
-            }
-
-        )
-    })
 
 
     const tcontents =  [
@@ -56,6 +45,21 @@ chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
           parts: [{ text: "Great to meet you. What would you like to know?" }],
         },
       ];
+    
+    const tcontents1 = [
+      {
+        role: "user",
+        content: "yo",
+      },
+      {
+        role: "assistant",
+        content: "hi",
+      },
+      {
+        role: "user",
+        content: "what color is a cactus",
+      },
+    ];
 
     //sendResponse(JSON.stringify( modelId) )
     
@@ -64,7 +68,18 @@ chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
 
         const apiKey = 'AIzaSyBZ2WWXCEGU5S1bT9PUMQXdoE2rfDL0I8A'
         const modelId='gemini-1.5-flash'
+        let contents = [];
 
+
+        request.chatHistory.forEach( (d) =>{
+            contents.push(
+                {
+                    role: d[0],
+                    parts: [{text :  d[1]}]
+                }
+    
+            )
+        })
 
         try {
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`, {
@@ -104,10 +119,46 @@ chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
         } catch (error) {
           sendResponse(error.stack);
         }
-
+    
         
+    } else if (request.message == 'generateAIML') {
+      const apiKey = '7addc663e34e4be8a4ade72230a053d4'
+      const model = 'gpt-4o'
+
+      let contents = [];
+
+      request.chatHistory.forEach( (d) =>{
+          contents.push(
+              {
+                  role: d[0],
+                  content: d[1]
+              }
+  
+          )
+      })
+
+      try {
+        await fetch("https://api.aimlapi.com/chat/completions", {
+          method: "POST",
+          headers: {
+            Authorization: 'Bearer 7addc663e34e4be8a4ade72230a053d4',
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: model,
+            messages: tcontents1,
+            max_tokens: 512,
+            stream: false,
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => sendResponse(res));
+      } catch (error) {
+        sendResponse("Error")
+      }
+
     }
-    sendResponse('not generate')
+    sendResponse('not generated')
     
 
     //sendResponse(chrome.runtime.getManifest().version);
