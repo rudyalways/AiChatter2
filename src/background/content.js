@@ -58,12 +58,12 @@ const checkForNewMessages = async() =>{
 }
 
 
-checkForNewMessages()
+//checkForNewMessages()
   // Start checking for new messages
   
 document.addEventListener('DOMContentLoaded', function() {
     alert("loaded")
-    checkForNewMessages();
+    //checkForNewMessages();
 });
 
 

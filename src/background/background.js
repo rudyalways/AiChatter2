@@ -146,7 +146,7 @@ chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
           },
           body: JSON.stringify({
             model: model,
-            messages: tcontents1,
+            messages: contents,
             max_tokens: 512,
             stream: false,
           }),
@@ -154,7 +154,7 @@ chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
           .then((res) => res.json())
           .then((res) => sendResponse(res.choices[0].message.content));
       } catch (error) {
-        sendResponse("Error")
+        sendResponse(error)
       }
 
     }
