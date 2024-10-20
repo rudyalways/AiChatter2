@@ -147,15 +147,22 @@ chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
           body: JSON.stringify({
             model: model,
             messages: contents,
-            max_tokens: 512,
+            max_tokens: 200,
             stream: false,
           }),
         })
           .then((res) => res.json())
           .then((res) => sendResponse(res.choices[0].message.content));
+          // TODO: call Mistral to do classification
+
+          // TODO: call heygen to generate the Video
       } catch (error) {
         sendResponse(error)
       }
+
+      // https://app.heygen.com/share/ad387a9998b34f5e825290e0288100f7
+
+
 
     }
     sendResponse('not generated')

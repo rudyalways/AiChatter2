@@ -17,6 +17,17 @@ GET_RESPONSE_BUTTON.addEventListener('click', async () => {
 });
 
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function example() {
+  console.log("Start");
+  
+  await sleep(2000);  // Pauses for 2 seconds (2000 milliseconds)
+  
+  console.log("End after 2 seconds");
+}
 
 
 
@@ -54,7 +65,7 @@ const checkForNewMessagesAndReply = async() =>{
     childrenData.forEach( (d) =>{
         newMessage = d[1]
     })
-    alert(chatHistory)
+    //alert(chatHistory)
 
 
     response = 'empty'
@@ -74,6 +85,12 @@ const checkForNewMessagesAndReply = async() =>{
         const aireply =  response
         //const aireply = 'aireply'
         alert(aireply)
+
+        //await sleep(2000)
+
+        alert('Hi, Yes, we do have some Video course.\n Please check out course HeyGen link: https://app.heygen.com/share/ad387a9998b34f5e825290e0288100f7')
+
+
         
         //alert("message from AI!!!!\nmessage from AI!!!!\n\n" + aireply)
 
@@ -111,9 +128,9 @@ if (brElement) {
   console.error('No <br> element found in the specified parent');
 }
 
-        alert(inputBox)
+       // alert(inputBox)
 
-        alert(inputBox.children[0].classList)
+        //alert(inputBox.children[0].classList)
         /*
         inputBox.textContent = '###############';
         inputBox.innerText = '###############';
@@ -146,7 +163,6 @@ if (brElement) {
         submitButton.click()
         submitButton.click()
         //alert(submitButton)
-        alert('button logic')
 
 
         lastMessage=newMessage
