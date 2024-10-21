@@ -39,7 +39,9 @@ const checkForNewMessagesAndReply = async() =>{
     //alert(inputBox.length)
     chatHistory = ''
 
-    const childrenData = []
+    newMessage = ''
+
+    const childrenData0 = []
     for (let element of inputBox) {
 
         // outgoing
@@ -56,12 +58,15 @@ const checkForNewMessagesAndReply = async() =>{
         element.classList.contains('x126k92a') &&
         element.classList.contains('xyk4ms5')) {
           chatHistory += ('outgoing:' + element.textContent+'\n')
-          childrenData.push(['assistant', element.textContent])
+          childrenData0.push(['assistant', element.textContent])
         } else {
           chatHistory += ('incoming:' + element.textContent+'\n')
-          childrenData.push(['user', element.textContent])
+          childrenData0.push(['user', element.textContent])
         }
     }
+
+    const childrenData =  childrenData0.slice(-10)
+    
     childrenData.forEach( (d) =>{
         newMessage = d[1]
     })
@@ -69,7 +74,13 @@ const checkForNewMessagesAndReply = async() =>{
 
 
     response = 'empty'
-    if (response =='empty') {
+    if (newMessage.includes('check out')) { 
+        prompt('','Hi, Yes, we do have some Video course.\n Please check out course HeyGen link: https://app.heygen.com/share/ad387a9998b34f5e825290e0288100f7')
+
+
+
+    }
+    else if (response =='empty') {
         alert('call ai model:\n' + chatHistory)
 
         // call ai model
@@ -84,13 +95,13 @@ const checkForNewMessagesAndReply = async() =>{
         //alert('res'+JSON.stringify(response))
         const aireply =  response
         //const aireply = 'aireply'
-        alert(aireply)
+        //alert(aireply)
+        prompt('copied to clipboard:', aireply)
+
 
         //await sleep(2000)
 
-        alert('Hi, Yes, we do have some Video course.\n Please check out course HeyGen link: https://app.heygen.com/share/ad387a9998b34f5e825290e0288100f7')
-
-
+     
         
         //alert("message from AI!!!!\nmessage from AI!!!!\n\n" + aireply)
 

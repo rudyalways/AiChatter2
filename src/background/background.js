@@ -68,7 +68,12 @@ chrome.runtime.onMessage.addListener( (request, _sender, sendResponse) => {
 
         const apiKey = 'AIzaSyBZ2WWXCEGU5S1bT9PUMQXdoE2rfDL0I8A'
         const modelId='gemini-1.5-flash'
-        let contents = [];
+        let contents = [
+          {
+            role: 'system',
+            content: 'You are a woman. You are an instagram sales influencer that sells sales courses online and offline.'
+          }
+        ];
 
 
         request.chatHistory.forEach( (d) =>{
